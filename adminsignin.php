@@ -101,7 +101,7 @@ button:hover {
 </head>
 <body>
   <div class="login-container">
-    <h2>Login Perpustakaan</h2>
+    <h2>Login Admin </h2>
     <form method="POST">
       <div class="form-group">
         <label for="email">Email:</label>

@@ -46,34 +46,43 @@ if (isUserLoggedIn()) {
     </div>
   </div>
 </nav>
+
+ <div>
+ 	<center><h2>Tambah Menu</h2></center>
+ 	<form action="aksi_insert_menu.php" method="POST" style="width: 100%;" >
+			<div class="mb-3">
+			  <input type="text" name="nama_menu" placeholder="Nama Menu" class="form-control" id="exampleFormControlInput1" required="">
+
+			  <input type="number" name="harga" placeholder="harga" class="form-control" id="exampleFormControlInput1" required="">
+			  
+			<br/>
+			<center>
+				<input type="submit" name="submit" value="Tambah Menu" class="btn btn-primary"  onclick="return confirm('Apakah Data akan disimpan?')">
+			</center>
+			</div>
+		</form>
+ </div>
  <div>
  	<table class="table table-striped">
   		<thead>
 		    <tr>
 		      <th scope="col">Id </th>
 		      <th scope="col">Nama</th>
-		      <th scope="col">Email</th>
-		      <th scope="col">Waktu</th>
-		      <th scope="col">Jumlah Orang</th>
-		      <th scope="col">Note</th>
+		      <th scope="col">Harga</th>
+		      <th scope="col">Aksi</th>
 		    </tr>
 		</thead>
 		<tbody>
 		    <?php 
-		      $query = "SELECT reservasi.id, reservasi.email, reservasi.waktu, reservasi.jumlah_orang, reservasi.note, member.username
-              FROM reservasi
-              INNER JOIN member ON reservasi.member_id = member.id
-              ORDER BY reservasi.id ASC";
+		      $query = "SELECT * FROM menu ORDER BY nama_menu asc";
 		      $data = mysqli_query($conn,$query) or die("Gagal query:".$query);
 		    ?>
 		    <?php while ($v=mysqli_fetch_array($data)):;?>
 		    <tr>
-		        <td><?php echo $v["id"];?></td>
-		        <td><?php echo $v["username"];?></td>
-		        <td><?php echo $v["email"];?></td>
-		        <td><?php echo $v["waktu"];?></td>
-		        <td><?php echo $v["jumlah_orang"];?></td>
-		        <td><?php echo $v["note"];?></td>
+		      <td><?php echo $v["id"];?></td>
+		      <td><?php echo $v["nama_menu"];?></td>
+		      <td><?php echo $v["harga"];?></td>
+		      <td><a href="hapus.php?id=<?php echo $v['id'];?>" class="btn btn-danger" >Hapus</a>&nbsp; <a href="edit.php?id=<?php echo $v['id'];?>" class="btn btn-success" >Edit</a></td>
 		    </tr>
 		  <?php endwhile;?>
 		</tbody>
